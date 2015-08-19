@@ -440,7 +440,9 @@ var resizePizzas = function(size) {
     }
 
     //is not accessed to check its value at each iteration
-    var randomPizzas = document.getElementsByClassName(".randomPizzaContainer");   //saved document.getElementsByClassName(".randomPizzaContainer") into the variable randomPizzas
+    //changed querySelecorALL() to getElementsByClassName() and saved document.getElementsByClassName("randomPizzaContainer") 
+    //into the variable randomPizzas
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");   
     var len = randomPizzas.length;   //saved the array length in a local variable, so the array's length property
 
     for (var i = 0; i < len; i++) {
@@ -449,7 +451,6 @@ var resizePizzas = function(size) {
   }
 
   changePizzaSizes(size);
-  console.log("change function: "+ changePizzaSizes(size));
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -494,7 +495,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');   //change querySeclectorALL to get getElementsByClassName
   var len =  items.length;  // moved items.length to var outside loop
   var pizzaScroll = document.body.scrollTop / 1250; // moved the constant "document.body.scrollTop / 1250" into var outside loop
   var phase; // created var phase outside of loop
@@ -521,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var elem;   //created var elem outside of loop
-  var movingPizzas = document.getElementById('movingPizzas1');  // moved var movingPizzas outside the loop
+  var movingPizzas = document.getElementById('movingPizzas1');  // moved var movingPizzas outside the loop and changed querySelector to getElementById
   // var pizzaNum = window.screen.height * ? * cols;
   for (var i = 0; i < 35; i++) {    // reduced the iteration number to 35
     elem = document.createElement('img');
