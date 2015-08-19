@@ -11,10 +11,12 @@ This will create new folders named "build", which contain the optimized data (on
 
 3. Assembling your website work
 Create a new folder from where you will be hosting the site and move the following files into them:
-- all the files in the /build folder
-- all the files in the /views/build folder
+- all html files from the /build/mnihtml folder
+- the js and img folder from the /build folder
+create a views folder and include the following
+- the pizza.html file from the /views/build/minihtml folder
+- the js and images folders from /views/build
 - the original css folder from /views/css (this is necessary as it is not being optimized due to style changes)
-- Finally delete the html files in all the new folders and replace them with the html files of the minihtml folders respectively (you may also delete the then empty minihtml folders). This last step is necessary to receive the most compresed version of the html files.
 
 
 OPTIMIZATION STEPS TAKEN:
