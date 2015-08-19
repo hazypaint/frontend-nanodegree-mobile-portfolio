@@ -18,6 +18,7 @@ cameron *at* udacity *dot* com
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
+"use strict";
 var pizzaIngredients = {};
 pizzaIngredients.meats = [
   "Pepperoni",
@@ -420,40 +421,47 @@ var resizePizzas = function(size) {
   }
   changeSliderLabel(size);
 
-  //Iterates through pizza elements on the page and changes their widths
+  // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
     switch(size) {
       case "1":
-        newwidth = 25;
+        var newWidth = 25;
         break;
       case "2":
-        newwidth = 33.3;
+        var newWidth = 33.3;
         break;
       case "3":
-        newwidth = 50;
+        var newWidth = 50;
         break;
       default:
         console.log("bug in sizeSwitcher");   
     }
-    var randomPizzas = document.querySelectorAll(".randomPizzaContainer")
 
-    for (var i = 0; i < randomPizzas.length; i++) {
-      randomPizzas[i].style.width = newwidth + "%";
+    //is not accessed to check its value at each iteration
+    var randomPizzas = document.getElementsByClassName(".randomPizzaContainer")   //saved document.getElementsByClassName(".randomPizzaContainer") into the variable randomPizzas
+    var len = randomPizzas.length   //saved the array length in a local variable, so the array's length property
+
+    for (var i = 0; i < len; i++) {
+      randomPizzas[i].style.width = newWidth + "%";   //combines the new width with the percentage
     }
+    console.log(newWidth + "%");
   }
+changePizzaSizes(size);
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
+  // console.log("Pizza size" + newWidth)
 };
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");    // saved the  pizzasDiv variable outside of the loop
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -485,9 +493,11 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var items = document.querySelectorAll('.mover');
-  var pizzaScroll = document.body.scrollTop / 1250;
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(pizzaScroll + (i % 5));
+  var len =  items.length;  // moved items.length to var outside loop
+  var pizzaScroll = document.body.scrollTop / 1250; // moved the constant "document.body.scrollTop / 1250" into var outside loop
+  var phase; // created var phase outside of loop
+  for (var i = 0; i < len; i++) {
+    phase = Math.sin(pizzaScroll + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -508,7 +518,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  // var pizzaNum = window.screen.height * ? * cols;
+  for (var i = 0; i < 35; i++) {    // reduced the iteration number to 35
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
