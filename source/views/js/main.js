@@ -439,11 +439,12 @@ var resizePizzas = function(size) {
         console.log("bug in sizeSwitcher");   
     }
 
-    //is not accessed to check its value at each iteration
-    //changed querySelecorALL() to getElementsByClassName() and saved document.getElementsByClassName("randomPizzaContainer") 
-    //into the variable randomPizzas
+    /*Now it is not accessed to check its value at each iteration
+    querySelecorALL() was replaced with getElementsByClassName()
+    document.getElementsByClassName("randomPizzaContainer") is now a var and defined outside of loop
+    array length is saved in a local variable outside of loop */
     var randomPizzas = document.getElementsByClassName("randomPizzaContainer");   
-    var len = randomPizzas.length;   //saved the array length in a local variable, so the array's length property
+    var len = randomPizzas.length;   
 
     for (var i = 0; i < len; i++) {
       randomPizzas[i].style.width = newWidth + "%";   //combines the new width with the percentage
@@ -462,7 +463,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-var pizzasDiv = document.getElementById("randomPizzas");    // saved the  pizzasDiv variable outside of the loop
+var pizzasDiv = document.getElementById("randomPizzas");    // pizzasDiv variable is now saved outside of the loop
 
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -497,7 +498,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   var items = document.getElementsByClassName('mover');   //change querySeclectorALL to get getElementsByClassName
   var len =  items.length;  // moved items.length to var outside loop
-  var pizzaScroll = document.body.scrollTop / 1250; // moved the constant "document.body.scrollTop / 1250" into var outside loop
+  var pizzaScroll = document.body.scrollTop / 1250; // moved the constant "document.body.scrollTop / 1250" into var outside of loop
   var phase; // created var phase outside of loop
   for (var i = 0; i < len; i++) {
     phase = Math.sin(pizzaScroll + (i % 5));
