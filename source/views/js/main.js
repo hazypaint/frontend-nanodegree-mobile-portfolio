@@ -522,10 +522,11 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var rows = Math.floor(window.screen.height / 100); //100 is the height of a pizza - line 532.
+  var pizzaNum = rows * cols;
   var elem;   //created var elem outside of loop
   var movingPizzas = document.getElementById('movingPizzas1');  // moved var movingPizzas outside the loop and changed querySelector to getElementById
-  // var pizzaNum = window.screen.height * ? * cols;
-  for (var i = 0; i < 35; i++) {    // reduced the iteration number to 35
+  for (var i = 0; i < pizzaNum; i++) {    // reduced the iteration number to 35
     elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
